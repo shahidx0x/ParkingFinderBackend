@@ -22,7 +22,27 @@ exports.signup = async (req, res) => {
     res.status(201).json({ payload, token: token });
   } catch (errors) {
     console.log(errors);
-    res.status(500).json({ msg: {errors} });
+    res.status(500).json({ msg: { errors } });
   }
 };
 
+exports.signin = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const isExist = await userModel.findOne({ email: email });
+    if (!isExist) return res.status(404).json({ msg: "user not registered" });
+    const matchPassHashed = await bcrypt.compare(password, isExist.password);
+    if (!matchPassHashed)
+      return res.status(400).json({ msg: "wrong password" });
+
+    const token = jwt.sign(
+      { email: isExist.email, id: isExist._id },
+      SECRET_KEY,
+      { expiresIn: "1h" }
+    );
+    res.status(201).json({ isExist, token: token });
+  } catch (errors) {
+    console.log(errors);
+    res.status(500).json({ msg: { errors } });
+  }
+};

@@ -5,9 +5,9 @@
     "version": "1.0.0",
     "title": "Parking Finder Server"
   },
-  "host": "localhost:3131",
+  "host": "s3-parking-finder.onrender.com",
   "basePath": "/",
- 
+
   "schemes": ["https", "http"],
 
   "paths": {
@@ -115,7 +115,18 @@
         }
       }
     }
-  }
-
-
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "Enter your JWT token in the format 'Bearer {token}'."
+    }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ]
 }
