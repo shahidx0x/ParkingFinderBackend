@@ -10,11 +10,12 @@ const serverLog = require("./src/middleware/serverLog");
 const swagger_router = require('./src/api/swagger-ui/router');
 const auth_router = require("./src/api/users/auth/router");
 const forgot_pass_router = require("./src/api/users/forgot-password/router");
-const authenticator = require("./src/middleware/authenticator");
+
 
 //  middleware
 
 app.set("view engine", "ejs");
+app.use(express.static("./"));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
