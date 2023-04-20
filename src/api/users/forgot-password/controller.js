@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const ejs = require("ejs");
 const path = require("path");
 
+
 exports.forgot_password = async (req, res, next) => {
   const { email } = req.body;
   try {
@@ -67,20 +68,31 @@ exports.forgot_password = async (req, res, next) => {
   }
 };
 
-exports.verifyAndUpdatePassword = async (req, res) => {
-  const { resetToken, newPassword } = req.body;
+exports.verifyToken = async (req, res) => {
+  const { resetToken } = req.body;
   try {
-    // Find user by reset token
-    const user = await User.findOne({ resetPasswordToken: resetToken });
+    const user = await userModel.findOne({ resetPasswordToken: resetToken });
     if (!user) {
-      return res.status(400).json({ message: "Invalid reset token" });
+      return res.status(400).json({ msg: "Invalid reset token" });
     }
-    // Check if token has expired
+
     const now = new Date();
     if (now > user.resetPasswordExpires) {
-      return res.status(400).json({ message: "Reset token has expired" });
+      return res.status(400).json({ msg: "Reset token has expired" });
     }
-    // Update user's password
+
+    return res.status(200).json({ msg: "Valid Token" });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ msg: "Server error" });
+  }
+};
+
+exports.resetPassword = async (req, res) => {
+  const { resetToken, newPassword } = req.body;
+  console.log(resetToken, newPassword);
+  const user = await userModel.findOne({ resetPasswordToken: resetToken });
+  try {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(newPassword, salt);
     user.password = hashedPassword;
@@ -88,8 +100,8 @@ exports.verifyAndUpdatePassword = async (req, res) => {
     user.resetPasswordExpires = null;
     await user.save();
     return res.status(200).json({ message: "Password updated successfully" });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ message: "Server error" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ msg: "Internal Server error" });
   }
 };
