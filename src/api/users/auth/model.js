@@ -41,6 +41,7 @@ const userData = new Schema(
       },
     },
     password: { type: String, required: true },
+    deviceToken: { type: String },
     resetPasswordToken: {
       type: String,
     },
