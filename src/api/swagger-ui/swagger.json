@@ -340,7 +340,7 @@
     }
   },
   "securityDefinitions": {
-    "Bearer": {
+    "jwt": {
       "type": "apiKey",
       "name": "Authorization",
       "in": "header",
@@ -349,7 +349,7 @@
   },
   "security": [
     {
-      "Bearer": []
+      "jwt": []
     }
   ]
 }
