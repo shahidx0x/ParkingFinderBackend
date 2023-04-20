@@ -170,6 +170,173 @@
           }
         }
       }
+    },
+    "/user/forgot-password": {
+      "post": {
+        "tags": ["Forgot Password"],
+        "summary": "Forgot Password",
+        "description": "Send an email to reset password",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Email of user who forgot password",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ForgotPasswordRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    },
+    "/user/verifyToken": {
+      "post": {
+        "tags": ["Forgot Password"],
+        "summary": "Verify Password Reset Token",
+        "description": "Verify that the provided password reset token is valid.",
+        "operationId": "verifyToken",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "JSON object containing the password reset token",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VerifyTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Password reset token is valid"
+          },
+          "400": {
+            "description": "Invalid request parameters or invalid password reset token"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/user/resetPassword": {
+      "post": {
+        "tags": ["Forgot Password"],
+        "summary": "Reset password",
+        "description": "Reset user password with reset token",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResetPasswordRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "400": {
+            "description": "Bad request response",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "404": {
+            "description": "Not found response",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "500": {
+            "description": "Internal server error response",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ForgotPasswordRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "example@example.com"
+        }
+      }
+    },
+    "VerifyTokenRequest": {
+      "type": "object",
+      "properties": {
+        "resetToken": {
+          "type": "string"
+        }
+      },
+      "required": ["resetToken"]
+    },
+    "ResetPasswordRequest": {
+      "type": "object",
+      "properties": {
+        "resetToken": {
+          "type": "string",
+          "example": "123456"
+        },
+        "newPassword": {
+          "type": "string",
+          "example": "123456"
+        }
+      }
+    },
+    "Response": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "message": {
+          "type": "string",
+          "example": "Success message"
+        }
+      }
     }
   },
   "securityDefinitions": {
