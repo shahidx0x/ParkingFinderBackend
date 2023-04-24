@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "title": "Parking Finder Server"
   },
-  "host": "s3-parking-finder.onrender.com",
+  "host": "localhost:5000",
   "basePath": "/",
 
   "schemes": ["https", "http"],
@@ -16,81 +16,82 @@
         "summary": "Creates a new user",
         "description": "This endpoint allows you to create a new user",
         "tags": ["Authentication"],
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "in": "body",
-            "name": "user",
-            "description": "User object",
-            "required": true,
-            "schema": {
+            "in": "formData",
+            "name": "profile_image",
+            "type": "file",
+            "description": "User's profile image",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "email",
+            "type": "string",
+            "format": "email",
+            "description": "User's email address",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "password",
+            "type": "string",
+            "description": "User's password",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "userinfo",
+            "type": "array",
+            "items": {
               "type": "object",
               "properties": {
-                "email": {
+                "username": {
                   "type": "string",
-                  "format": "email",
-                  "description": "User's email address",
-                  "example": "johndoe@example.com"
+                  "description": "User's username",
+                  "example": "johndoe"
                 },
-                "password": {
+                "nick_name": {
                   "type": "string",
-                  "description": "User's password",
-                  "example": "mysecretpassword"
+                  "description": "User's nickname",
+                  "example": "Johnny"
                 },
-                "userinfo": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "profile_image": {
-                        "type": "string",
-                        "description": "URL of user's profile image",
-                        "example": "https://st4.depositphotos.com/4329009/19956/v/600/depositphotos_199564354-stock-illustration-creative-vector-illustration-default-avatar.jpg"
-                      },
-                      "username": {
-                        "type": "string",
-                        "description": "User's username",
-                        "example": "johndoe"
-                      },
-                      "nick_name": {
-                        "type": "string",
-                        "description": "User's nickname",
-                        "example": "Johnny"
-                      },
-                      "cont_no": {
-                        "type": "string",
-                        "description": "User's contact number",
-                        "example": "01234567890"
-                      },
-                      "nid_image": {
-                        "type": "string",
-                        "description": "URL of user's National ID image",
-                        "example": "https://example.com/nid_image.jpg"
-                      },
-                      "licence_image": {
-                        "type": "string",
-                        "description": "URL of user's driving license image",
-                        "example": "https://example.com/licence_image.jpg"
-                      },
-                      "role": {
-                        "type": "string",
-                        "description": "User's role",
-                        "example": "admin"
-                      },
-                      "isVerified": {
-                        "type": "string",
-                        "description": "User's verification status",
-                        "example": "verified"
-                      }
-                    },
-                    "required": ["username", "nick_name", "cont_no"]
-                  },
-                  "description": "User's personal information"
+                "cont_no": {
+                  "type": "string",
+                  "description": "User's contact number",
+                  "example": "01234567890"
+                },
+                "nid_image": {
+                  "type": "string",
+                  "description": "URL of user's National ID image",
+                  "example": "https://example.com/nid_image.jpg"
+                },
+                "licence_image": {
+                  "type": "string",
+                  "description": "URL of user's driving license image",
+                  "example": "https://example.com/licence_image.jpg"
+                },
+                "role": {
+                  "type": "string",
+                  "description": "User's role",
+                  "example": "admin"
+                },
+                "isVerified": {
+                  "type": "string",
+                  "description": "User's verification status",
+                  "example": "verified"
                 }
               },
-              "required": ["email", "password", "userinfo"]
-            }
+              "required": ["username", "nick_name", "cont_no", "nid_image", "licence_image", "role", "isVerified"]
+            },
+            "description": "User's personal information",
+            "required": true
           }
         ],
         "responses": {
@@ -115,7 +116,8 @@
           }
         }
       }
-    },
+    }
+    ,
     "/signin/user": {
       "post": {
         "summary": "Sign in a user",

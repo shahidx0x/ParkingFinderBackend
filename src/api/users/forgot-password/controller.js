@@ -1,8 +1,8 @@
-const nodemailer = require("nodemailer");
-const userModel = require("../auth/model");
-const bcrypt = require("bcrypt");
-const ejs = require("ejs");
-const path = require("path");
+const nodemailer = require("nodemailer"   );
+const userModel  = require("../auth/model");
+const bcrypt     = require("bcrypt"       );
+const ejs        = require("ejs"          );
+const path       = require("path"         );
 
 
 exports.forgot_password = async (req, res, next) => {
@@ -78,10 +78,10 @@ exports.verifyToken = async (req, res) => {
 
     const now = new Date();
     if (now > user.resetPasswordExpires) {
-      return res.status(400).json({ msg: "Reset token has expired" });
+      return res.status(400).json({ msg: "Reset token has expired ! Try again" });
     }
 
-    return res.status(200).json({ msg: "Valid Token" });
+    return res.status(200).json({ msg: "Verification Successfull" });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ msg: "Server error" });

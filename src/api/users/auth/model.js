@@ -11,6 +11,7 @@ const userData = new Schema(
             "https://st4.depositphotos.com/4329009/19956/v/600/depositphotos_199564354-stock-illustration-creative-vector-illustration-default-avatar.jpg",
         },
         username: { type: String, required: true },
+        address: { type: String },
         nick_name: { type: String, required: true },
         cont_no: {
           type: String,
@@ -26,7 +27,10 @@ const userData = new Schema(
         nid_image: { type: String, default: "unavilable" },
         licence_image: { type: String, default: "unavilable" },
         role: { type: String, default: "not-set" },
-        isVerified: { type: String, default: "not-verified" },
+        isEmailVerified: { type: String, default: "not-verified" },
+        isPhoneVerified: { type: String, default: "not-verified" },
+        dob: String,
+    gender: String,
       },
     ],
     email: {
@@ -48,6 +52,7 @@ const userData = new Schema(
     resetPasswordExpires: {
       type: Date,
     },
+    
   },
   { timestamps: true }
 );
