@@ -29,8 +29,8 @@ const userData = new Schema(
         role: { type: String, default: "not-set" },
         isEmailVerified: { type: String, default: "not-verified" },
         isPhoneVerified: { type: String, default: "not-verified" },
-        dob: String,
-    gender: String,
+        dob: { type: String, default: "01/01/1970" },
+        gender: { type: String, default: "Male" },
       },
     ],
     email: {
@@ -52,7 +52,6 @@ const userData = new Schema(
     resetPasswordExpires: {
       type: Date,
     },
-    
   },
   { timestamps: true }
 );
