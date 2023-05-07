@@ -8,7 +8,8 @@ const bodyParser = require("body-parser")                                   ;
 const connectDB = require("./src/config/database")                          ;
 const serverLog = require("./src/middleware/serverLog")                     ;
 const swagger_router = require("./src/api/swagger-ui/router")               ;
-const auth_router = require("./src/api/users/auth/router")                  ;
+const auth_router = require("./src/api/users/auth/router")
+const manage_router = require("./src/api/users/manage-user/router")                  ;
 const forgot_pass_router = require("./src/api/users/forgot-password/router");
 
 //  middleware
@@ -26,6 +27,7 @@ app.use(serverLog);
 // Routers
 app.use(swagger_router);
 app.use(auth_router);
+app.use(manage_router)
 
 app.use(forgot_pass_router);
 
@@ -33,5 +35,5 @@ app.use(forgot_pass_router);
 connectDB();
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`.bgCyan);
+  console.log(`Server is running on port http://localhost:${port}`.bgCyan);
 });

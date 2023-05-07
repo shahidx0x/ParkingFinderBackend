@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer"   );
-const userModel  = require("../auth/model");
+const userModel  = require("../common/model");
 const bcrypt     = require("bcrypt"       );
 const ejs        = require("ejs"          );
 const path       = require("path"         );

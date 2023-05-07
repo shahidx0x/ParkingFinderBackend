@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const SECRET_KEY = process.env.SECRET_KEY;
 const jwt = require("jsonwebtoken");
-const userModel = require("./model");
+const userModel = require("../common/model");
 
 exports.signup = async (req, res) => {
   const {
@@ -60,7 +60,6 @@ exports.signup = async (req, res) => {
     res.status(500).json({ msg: { errors } });
   }
 };
-
 exports.signin = async (req, res) => {
   const { email, password } = req.body;
   try {
