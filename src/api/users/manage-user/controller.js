@@ -1,53 +1,65 @@
 const userModel = require("../common/model");
 
-exports.updateProfile = (req, res) => {
-    let email = req.params.email;
-    console.log(email);
-    let reqBody = req.body;
-    userModel.updateOne({ email: email }, reqBody, (err, data) => {
-        if (err) {
-            res.status(400).json({ status: "fail", data: err })
-        }
-        else {
-            res.status(200).json({ status: "success", data: data })
-        }
-    })
+exports.update_profile = async (req, res) => {
+  let data;
+  let email = req.params.email;
+  try {
+    data = await userModel.findOne({ email: email });
+    if (data) {
+      Object.assign(data, req.body);
+      data.save();
+      res.status(200).json({ msg: "updated", data });
+    }
+  } catch (error) {
+    return next(error);
+  }
+};
 
-    /* const Person =await userModel.findOne({ email: email});
+exports.search_by_email = async (req, res) => {
+  let email = req.params.email;
+  try {
+    data = await userModel.findOne({ email: email });
+    if (data) {
+      res.status(200).json(data);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
 
-    Person.updateOne({}, {reqBody});
-     */
-
-}
-
-
-exports.searchByEmail = (req, res) => {
-    let email = req.params.email;
-    userModel.aggregate([
-        {$match:{email:email}},
-        {$project:{password:0}}
-    ],(err,data)=>{
-        if(err){
-            res.status(400).json({status:"fail",data:err})
-        }
-        else {
-            res.status(200).json({status:"success",data:data[0]})
-        }
-    })
-}
-
-
-exports.searchByCont_no = (req, res) => {
+exports.search_by_cont_no = async (req, res, next) => {
     let cont_no = req.params.cont_no;
-    
-    userModel.aggregate([
-        {$match:{cont_no:cont_no}},
-        {$project:{password:0}}
-    ],(err,data)=>{
-        if(err){
-            res.status(400).json({status:"fail",data:err})
-        }
-        else {
-            res.status(200).json({status:"success",data:data})
-        }
-    })}
+    try {
+      data = await userModel.findOne({
+        userinfo: {
+          $elemMatch: {
+            cont_no: cont_no,
+          },
+        },
+      });
+      console.log(data);
+      if (data) {
+        res.status(200).json(data);
+      } else {
+        res.status(404).json({ data });
+      }
+    } catch (error) {
+      next(error);
+    }
+  };
+  
+
+exports.get_all_user = async (req, res) => {
+  const users_all = await userModel.find({});
+  if (users_all) {
+    res.status(200).json(users_all);
+  }
+};
+
+exports.delete_all_user = async (req, res) => {
+  const deleted_list = await userModel.deleteMany({});
+  if (deleted_list) {
+    res.status(200).json({ msg: "all user deleted" });
+  }
+  res.status(500).json({ msg: "something went wrong" });
+};

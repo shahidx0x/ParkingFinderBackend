@@ -62,8 +62,10 @@ exports.signup = async (req, res) => {
 };
 exports.signin = async (req, res) => {
   const { email, password } = req.body;
+  console.log(email,password);
   try {
     const isExist = await userModel.findOne({ email: email });
+    console.log(isExist);
     if (!isExist) return res.status(404).json({ msg: "user not registered" });
 
     const matchPassHashed = await bcrypt.compare(password, isExist.password);
