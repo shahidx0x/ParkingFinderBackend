@@ -2,6 +2,16 @@
 
 Base URL: `https://s3-parking-finder.onrender.com/`
 
+## Core Technologies
+
+1. **Express**: A minimal and flexible Node.js web application framework for building APIs and web applications.
+2. **Mongoose (MongoDB)**: An Object Data Modeling (ODM) library for MongoDB and Node.js, simplifying the interaction with MongoDB.
+3. **JSON Web Token (jsonwebtoken)**: A library for generating and verifying JSON Web Tokens, used for secure authentication and authorization.
+4. **Axios**: A promise-based HTTP client for the browser and Node.js, used for making requests to external APIs.
+5. **Multer**: A middleware for handling `multipart/form-data`, used for uploading files.
+
+
+
 ## Authentication
 
 ### Signup User
@@ -144,3 +154,4 @@ Delete all users.
 
 - 200: User found
 - 404: User not found
+
