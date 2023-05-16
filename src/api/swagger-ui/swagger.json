@@ -2,10 +2,11 @@
   "swagger": "2.0",
   "info": {
     "description": "Parking Finder Backend API playground",
-    "version": "1.0.0",
+    "version": "1.0.3",
     "title": "Parking Finder Server"
   },
-  "host": "localhost:5000",
+  "host": "s3-parking-finder.onrender.com",
+
   "basePath": "/",
 
   "schemes": ["https", "http"],
@@ -290,6 +291,94 @@
             "schema": {
               "$ref": "#/definitions/Response"
             }
+          }
+        }
+      }
+    },
+    "/user/profile/update/{email}": {
+      "post": {
+        "summary": "Update user profile",
+        "tags": ["Manage Users"],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "description": "User's email",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Profile updated successfully"
+          }
+        }
+      }
+    },
+    "/user/search/email/{email}": {
+      "get": {
+        "summary": "Search user by email",
+        "tags": ["Manage Users"],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "description": "Email to search",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User found"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/user/list": {
+      "get": {
+        "summary": "Get all users",
+        "tags": ["Manage Users"],
+        "responses": {
+          "200": {
+            "description": "List of all users"
+          }
+        }
+      }
+    },
+    "/user/delete/all": {
+      "delete": {
+        "summary": "Delete all users",
+        "tags": ["Manage Users"],
+        "responses": {
+          "200": {
+            "description": "All users deleted"
+          }
+        }
+      }
+    },
+    "/user/search/contno/{cont_no}": {
+      "get": {
+        "summary": "Search user by contact number",
+        "tags": ["Manage Users"],
+        "parameters": [
+          {
+            "name": "cont_no",
+            "in": "path",
+            "description": "Contact number to search",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User found"
+          },
+          "404": {
+            "description": "User not found"
           }
         }
       }
