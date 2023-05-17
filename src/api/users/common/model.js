@@ -15,14 +15,7 @@ const userData = new Schema(
         nick_name: { type: String },
         cont_no: {
           type: String,
-          required: true,
-          unique: true,
-          validate: {
-            validator: function (v) {
-              return /^\d{11}$/.test(v);
-            },
-            message: "Invalid Number",
-          },
+         
         },
         nid_image: { type: String, default: "unavilable" },
         licence_image: { type: String, default: "unavilable" },
