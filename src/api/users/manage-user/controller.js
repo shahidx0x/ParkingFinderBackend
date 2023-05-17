@@ -3,7 +3,6 @@ const userModel = require("../common/model");
 exports.update_profile = async (req, res) => {
   let data;
   let mod_data = req.body;
-  console.log(profile_image);
   let res1 = Object.assign(mod_data, req.body.profile_image);
   console.log(res1);
   let email = req.params.email;
