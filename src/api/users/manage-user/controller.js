@@ -11,6 +11,7 @@ exports.update_profile = async (req, res) => {
     data = await userModel.findOne({ email: email });
     if (data) {
       Object.assign(data, req.body);
+      console.log(data);
       data.save();
       res.status(200).json({ msg: "updated", data });
     }
