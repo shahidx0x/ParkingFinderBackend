@@ -23,8 +23,8 @@ const  cloudinaryUploadMiddleware = (req, res, next) => {
       if (req.file) {
         const result = await cloudinary.uploader.upload(req.file.path);
         if (result) fs.unlinkSync(req.file.path);
-        req.body.profile_image = result.secure_url;
-        req.body.cloudinaryPublicId = result.public_id;
+         req.body.profile_image = result?.secure_url;
+        req.body.cloudinaryPublicId = result?.public_id;
       }
       next();
     } catch (error) {
