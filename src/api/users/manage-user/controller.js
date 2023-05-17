@@ -3,16 +3,15 @@ const userModel = require("../common/model");
 exports.update_profile = async (req, res) => {
   let data;
   let mod_data = req.body;
-  let profile_image = req.body.profile_image;
   console.log(profile_image);
-  // Object.assign(mod_data, profile_image);
+  let res = Object.assign(mod_data, req.body.profile_image);
+  console.log(res);
   let email = req.params.email;
   try {
     data = await userModel.findOne({ email: email });
     if (data) {
-      Object.assign(data, mod_data);
-      // console.log(data);
-      // data.save();
+      Object.assign(data, req.body);
+      data.save();
       res.status(200).json({ msg: "updated", data });
     }
   } catch (error) {
