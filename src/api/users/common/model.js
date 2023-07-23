@@ -9,10 +9,11 @@ const userData = new Schema(
         "https://st4.depositphotos.com/4329009/19956/v/600/depositphotos_199564354-stock-illustration-creative-vector-illustration-default-avatar.jpg",
     },
     username: { type: String, required: true },
-    address: { type: String },
-    nick_name: { type: String },
+    address: { type: String,default:"sewrapara" },
+    nick_name: { type: String,default:"iron-man" },
     phone_no: {
       type: String,
+      default:0
     },
     nid_image: { type: String, default: "unavailable" },
     licence_image: { type: String, default: "unavailable" },
@@ -22,8 +23,8 @@ const userData = new Schema(
     dob: { type: String, default: "01/01/1970" },
     gender: { type: String, default: "Male" },
     location: {
-      lat: Number,
-      lng: Number,
+      lat: {type:Number,default:0},
+      lng: {type:Number,default:0},
     },
     email: {
       type: String,
@@ -38,10 +39,10 @@ const userData = new Schema(
     },
     vic_list: [
       {
-        vic_name: String,
-        vic_type: String,
-        vic_number: Number,
-        vic_brand: String,
+        vic_name: { type: String, default: "remove this when called from front end },
+        vic_type: { type: String, default: "remove this when called from front end },
+        vic_number: { type: String, default: "remove this when called from front end },
+        vic_brand: { type: String, default: "remove this when called from front end },
       },
     ],
     password: { type: String, required: true },
