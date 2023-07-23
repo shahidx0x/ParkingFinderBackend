@@ -39,10 +39,10 @@ const userData = new Schema(
     },
     vic_list: [
       {
-        vic_name: { type: String, default: "remove this when called from front end },
-        vic_type: { type: String, default: "remove this when called from front end },
-        vic_number: { type: String, default: "remove this when called from front end },
-        vic_brand: { type: String, default: "remove this when called from front end },
+        vic_name: { type: String, default: "remove this when called from front end" },
+        vic_type: { type: String, default: "remove this when called from front end" },
+        vic_number: { type: String, default: "remove this when called from front end" },
+        vic_brand: { type: String, default: "remove this when called from front end" },
       },
     ],
     password: { type: String, required: true },
