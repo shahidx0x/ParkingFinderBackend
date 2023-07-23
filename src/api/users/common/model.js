@@ -9,8 +9,8 @@ const userData = new Schema(
         "https://st4.depositphotos.com/4329009/19956/v/600/depositphotos_199564354-stock-illustration-creative-vector-illustration-default-avatar.jpg",
     },
     username: { type: String, required: true },
-    address: { type: String, default: "sewrapara" },
-    nick_name: { type: String, default: "iron-man" },
+    address: { type: String },
+    nick_name: { type: String },
     phone_no: {
       type: String,
     },
@@ -22,8 +22,8 @@ const userData = new Schema(
     dob: { type: String, default: "01/01/1970" },
     gender: { type: String, default: "Male" },
     location: {
-      lat: { type: Number, default: 1 },
-      lng: { type: Number, default: 1 },
+      lat: Number,
+      lng: Number,
     },
     email: {
       type: String,
@@ -38,22 +38,10 @@ const userData = new Schema(
     },
     vic_list: [
       {
-        vic_name: {
-          type: String,
-          default: "remove this when called from front end",
-        },
-        vic_type: {
-          type: String,
-          default: "remove this when called from front end",
-        },
-        vic_number: {
-          type: String,
-          default: "remove this when called from front end",
-        },
-        vic_brand: {
-          type: String,
-          default: "remove this when called from front end",
-        },
+        vic_name: String,
+        vic_type: String,
+        vic_number: Number,
+        vic_brand: String,
       },
     ],
     password: { type: String, required: true },
@@ -67,8 +55,4 @@ const userData = new Schema(
   },
   { timestamps: true }
 );
-
-// Remove the unique index on "phone_no"
-userData.index({ "phone_no": 1 }, { unique: false });
-
 module.exports = mongoose.model("userModel", userData);
