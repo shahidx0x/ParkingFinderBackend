@@ -31,27 +31,6 @@ exports.search_by_email = async (req, res) => {
   }
 };
 
-exports.search_by_cont_no = async (req, res, next) => {
-    let cont_no = req.params.cont_no;
-    try {
-      data = await userModel.findOne({
-        userinfo: {
-          $elemMatch: {
-            cont_no: cont_no,
-          },
-        },
-      });
-      if (data) {
-        res.status(200).json(data);
-      } else {
-        res.status(404).json({ data });
-      }
-    } catch (error) {
-      next(error);
-    }
-  };
-  
-
 exports.get_all_user = async (req, res) => {
   const users_all = await userModel.find({});
   if (users_all) {
