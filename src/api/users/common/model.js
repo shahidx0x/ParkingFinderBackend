@@ -13,7 +13,7 @@ const userData = new Schema(
     nick_name: { type: String,default:"iron-man" },
     phone_no: {
       type: String,
-      default:0
+      default:"0"
     },
     nid_image: { type: String, default: "unavailable" },
     licence_image: { type: String, default: "unavailable" },
@@ -23,8 +23,8 @@ const userData = new Schema(
     dob: { type: String, default: "01/01/1970" },
     gender: { type: String, default: "Male" },
     location: {
-      lat: {type:Number,default:0},
-      lng: {type:Number,default:0},
+      lat: {type:Number,default:1},
+      lng: {type:Number,default:1},
     },
     email: {
       type: String,
