@@ -13,7 +13,6 @@ const userData = new Schema(
     nick_name: { type: String,default:"iron-man" },
     phone_no: {
       type: String,
-      default:"0"
     },
     nid_image: { type: String, default: "unavailable" },
     licence_image: { type: String, default: "unavailable" },
