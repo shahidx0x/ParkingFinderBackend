@@ -1,4 +1,4 @@
-const userModel = require("../common/model");
+const userModel = require("../users/common/model");
 
 
 exports.update_location = async(req,res) =>{
