@@ -19,5 +19,5 @@ manage_router.get("/user/search/:email",authenticator, search_by_email);
 manage_router.get("/all/user/list", get_all_user);
 manage_router.get("/user/list", users);
 manage_router.get("/owner/list", owners);
-manage_router.delete("/user/delete/all", authenticator, delete_all_user);
+manage_router.delete("/user/delete/all", delete_all_user);
 module.exports = manage_router;

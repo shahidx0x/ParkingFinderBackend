@@ -11,6 +11,7 @@ const swagger_router = require("./src/api/swagger-ui/router")               ;
 const auth_router = require("./src/api/users/auth/router")                  ; 
 const manage_router = require("./src/api/users/manage-user/router")         ;
 const forgot_pass_router = require("./src/api/users/forgot-password/router");
+const location_router = require("./src/api/location/router");
 
 //  middleware
 app.set("view engine", "ejs"                      );
@@ -27,6 +28,7 @@ app.use(swagger_router);
 app.use(auth_router);
 app.use(manage_router);
 app.use(forgot_pass_router);
+app.use(location_router);
 
 // Connect to the database
 connectDB();
