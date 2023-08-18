@@ -28,8 +28,8 @@ exports.forgot_password = async (req, res, next) => {
     const transporter = nodemailer.createTransport({
       service: "Gmail",
       auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_PASS,
+        user: 'developer.imshahid@gmail.com',
+        pass: 'vvwstgrnkefzpvbv',
       },
     });
     const data = { code: resetToken, time: expiresIn };
@@ -43,7 +43,7 @@ exports.forgot_password = async (req, res, next) => {
         } else {
           const mailOptions = {
             to: user.email,
-            from: process.env.GMAIL_USER,
+            from: 'developer.imshahid@gmail.com',
             subject: `Email Verification Code : ${resetToken}`,
             html: html,
           };
