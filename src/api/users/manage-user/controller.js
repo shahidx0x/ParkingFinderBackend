@@ -38,6 +38,22 @@ exports.get_all_user = async (req, res) => {
   }
 };
 
+exports.users = async (req, res) => {
+  const users = await userModel.find({ role: "user" });
+  !users && res.status(400).json({ msg: "No user found !" });
+  if (users) {
+    res.status(200).json(users);
+  }
+};
+
+exports.owners = async (req, res) => {
+  const owners = await userModel.find({ role: "owner" });
+  !owners && res.status(400).json({ msg: "No owner found !" });
+  if (owners) {
+    res.status(200).json(owners);
+  }
+};
+
 exports.delete_all_user = async (req, res) => {
   const deleted_list = await userModel.deleteMany({});
   if (deleted_list) {

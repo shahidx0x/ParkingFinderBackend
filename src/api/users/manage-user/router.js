@@ -4,6 +4,8 @@ const {
   search_by_email,
   get_all_user,
   delete_all_user,
+  users,
+  owners,
 } = require("./controller");
 
 const manage_router = require("express").Router();
@@ -13,7 +15,9 @@ manage_router.post(
   authenticator,
   update_profile
 );
-manage_router.get("/user/search/email/:email", authenticator, search_by_email);
-manage_router.get("/user/list", get_all_user);
+manage_router.get("/user/search/:email",authenticator, search_by_email);
+manage_router.get("/all/user/list", get_all_user);
+manage_router.get("/user/list", users);
+manage_router.get("/owner/list", owners);
 manage_router.delete("/user/delete/all", authenticator, delete_all_user);
 module.exports = manage_router;
