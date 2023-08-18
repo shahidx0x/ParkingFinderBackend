@@ -1,21 +1,23 @@
 const userModel = require("../common/model");
 
 exports.update_profile = async (req, res) => {
-  let data;
-  let mod_data = req.body;
-  let res1 = Object.assign(mod_data, req.body.profile_image);
-  console.log(res1);
-  let email = req.params.email;
   try {
-    data = await userModel.findOne({ email: email });
-    if (data) {
-      Object.assign(data, req.body);
-      console.log(data);
-      data.save();
-      res.status(200).json({ msg: "updated", data });
+    const emailToUpdate = req.params.email;
+    const newData = req.body; 
+
+    const updatedUser = await userModel.findOneAndUpdate(
+      { email: emailToUpdate },
+      { $set: newData },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ msg: 'User not found' });
     }
+
+    res.status(200).json({msg : 'User Data Updated'});
   } catch (error) {
-    return next(error);
+    res.status(500).json({ msg: 'Error updating user data', error });
   }
 };
 
