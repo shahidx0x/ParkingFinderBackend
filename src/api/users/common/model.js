@@ -9,10 +9,11 @@ const userData = new Schema(
         "https://st4.depositphotos.com/4329009/19956/v/600/depositphotos_199564354-stock-illustration-creative-vector-illustration-default-avatar.jpg",
     },
     username: { type: String, required: true },
-    address: { type: String },
-    nick_name: { type: String },
+    address: { type: String, default: "Default Address" }, // Add default value
+    nick_name: { type: String, default: "Default Nickname" }, // Add default value
     phone_no: {
       type: String,
+      default: "Default Phone Number", // Add default value
     },
     nid_image: { type: String, default: "unavailable" },
     licence_image: { type: String, default: "unavailable" },
@@ -38,10 +39,20 @@ const userData = new Schema(
     },
     vic_list: [
       {
-        vic_name: String,
-        vic_type: String,
-        vic_number: Number,
-        vic_brand: String,
+        vic_name: { type: String, default: "Default Vic Name" },
+        vic_type: { type: String, default: "Default Vic Type" },
+        vic_number: { type: Number, default: 0 },
+        vic_brand: { type: String, default: "Default Vic Brand" },
+      },
+    ],
+
+    garaz_list: [
+      {
+        garaz_name: { type: String, default: "Default Garaz Name" },
+        garaz_type: { type: String, default: "Default Garaz Type" },
+        garaz_number: { type: Number, default: 0 },
+        garaz_address: { type: String, default: "Default Garaz Address" },
+        garaz_space: { type: String, default: "Default Garaz Space" },
       },
     ],
     password: { type: String, required: true },
@@ -55,4 +66,5 @@ const userData = new Schema(
   },
   { timestamps: true }
 );
+
 module.exports = mongoose.model("userModel", userData);
