@@ -37,24 +37,10 @@ const userData = new Schema(
         message: "Invalid Email Address",
       },
     },
-    vic_list: [
-      {
-        vic_name: { type: String, default: "Default Vic Name" },
-        vic_type: { type: String, default: "Default Vic Type" },
-        vic_number: { type: Number, default: 0 },
-        vic_brand: { type: String, default: "Default Vic Brand" },
-      },
-    ],
-
-    garaz_list: [
-      {
-        garaz_name: { type: String, default: "Default Garaz Name" },
-        garaz_type: { type: String, default: "Default Garaz Type" },
-        garaz_number: { type: Number, default: 0 },
-        garaz_address: { type: String, default: "Default Garaz Address" },
-        garaz_space: { type: String, default: "Default Garaz Space" },
-      },
-    ],
+    vic_list: [],
+    garaz_list: [],
+    parking: [],
+    payment: [],
     password: { type: String, required: true },
     deviceToken: { type: String },
     resetPasswordToken: {

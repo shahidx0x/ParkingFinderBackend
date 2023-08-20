@@ -3,7 +3,7 @@ const userModel = require("../common/model");
 exports.update_profile = async (req, res) => {
   try {
     const emailToUpdate = req.params.email;
-    const newData = req.body; 
+    const newData = req.body;
 
     const updatedUser = await userModel.findOneAndUpdate(
       { email: emailToUpdate },
@@ -12,12 +12,12 @@ exports.update_profile = async (req, res) => {
     );
 
     if (!updatedUser) {
-      return res.status(404).json({ msg: 'User not found' });
+      return res.status(404).json({ msg: "User not found" });
     }
 
-    res.status(200).json({msg : 'User Data Updated'});
+    res.status(200).json({ msg: "User Data Updated", updatedUser });
   } catch (error) {
-    res.status(500).json({ msg: 'Error updating user data', error });
+    res.status(500).json({ msg: "Error updating user data", error });
   }
 };
 
