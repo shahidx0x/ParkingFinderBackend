@@ -39,7 +39,6 @@ const userData = new Schema(
     },
     vic_list: [],
     garaz_list: [],
-    parking: [],
     payment: [],
     password: { type: String, required: true },
     deviceToken: { type: String },
