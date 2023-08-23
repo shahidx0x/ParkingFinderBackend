@@ -1,6 +1,6 @@
 # Parking Finder Server API
 
-Base URL: `https://s3-parking-finder.onrender.com/`
+Base URL: `https://s3-parking-finder.vercel.app`
 
 ## Core Technologies
 
