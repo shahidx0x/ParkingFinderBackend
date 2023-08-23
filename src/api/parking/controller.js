@@ -34,7 +34,7 @@ exports.update_specific = async (req, res) => {
     { new: true }
   );
   if (payload) {
-    res.status(200).json({ msg: "updated" });
+    res.status(200).json({ msg: "updated",payload });
   } else {
     res.status(500).json({ msg: "server error" });
   }
