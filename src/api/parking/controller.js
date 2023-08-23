@@ -28,23 +28,43 @@ exports.get_specific = async (req, res) => {
 };
 
 exports.update_specific = async (req, res) => {
-  const payload = parkingModel.findOneAndUpdate(
-    { email: req.params.email },
-    { parkingData: req.body },
-    { new: true }
-  );
-  if (payload) {
-    res.status(200).json({ msg: "updated" });
-  } else {
-    res.status(500).json({ msg: "server error" });
+  try {
+    const { email } = req.params;
+    const toUpdated = req.body;
+    const updatedDocument = await parkingModel.findOneAndUpdate(
+      { email: email },
+      { $set: { parkingData: toUpdated } },
+      { new: true }
+    );
+    if (updatedDocument) {
+      res.status(200).json({ payload: updatedDocument });
+    } else {
+      res.status(404).json({ msg: "Document not found" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Server error" });
   }
 };
 
 exports.delete_specific = async (req, res) => {
-  const deleted = await parkingModel.findOneAndDelete({
-    email: req.params.email,
-  });
-  if (!deleted) {
+  try {
+    const deleted = await parkingModel.findOneAndDelete({
+      email: req.params.email,
+    });
+    if (!deleted) {
+      return res.status(404).json({ error: "Parking not found", deleted });
+    }
+    return res.status(200).json({ msg: "Parking deleted" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ msg: "Server error", error: error.message });
+  }
+};
+
+exports.delete_all = async (req, res) => {
+  const deleted = await parkingModel.deleteMany();
+  if (!deleted.deletedCount > 0) {
     res.status(404).json({ error: "parking not found" });
   } else {
     res.status(200).json({ msg: "parking deleted" });
